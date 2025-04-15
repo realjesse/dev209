@@ -1,2 +1,6 @@
 const firstButtonNode = document.querySelector(".button.big.wide.smooth-scroll-middle");
-console.log(firstButtonNode);
+const soundEffect = new Audio('../../sounds/mouse-click-290204.mp3');
+
+firstButtonNode.addEventListener('click', () => {
+    soundEffect.play();
+})
