@@ -152,7 +152,7 @@ input, select, textarea {
 		}
 
 	body {
-		background-color: #ffffff;
+		background-color: hsl(0, 4%, 80%);
 		color: #000000;
 	}
 
