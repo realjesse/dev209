@@ -16,6 +16,10 @@ img {
     border-radius: 10px;
 }
 
+ul {
+    list-style: none;
+}
+
 section {
     width: 288px;
     background-color: hsl(0, 0%, 100%);
