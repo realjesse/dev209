@@ -12,3 +12,8 @@ img {
     width: 288px;
     height: 288px;
 }
+
+.heavy {
+    font-weight: 700;
+    font-size: 20px;
+}
