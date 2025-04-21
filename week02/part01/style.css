@@ -25,6 +25,10 @@ section {
     border-radius: 20px;
 }
 
+section p {
+    width: 262px;
+}
+
 .heavy {
     font-weight: 700;
     font-size: 20px;
