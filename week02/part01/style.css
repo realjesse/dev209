@@ -27,6 +27,7 @@ section {
 
 section p {
     width: 262px;
+    margin: 0;
 }
 
 .heavy {
