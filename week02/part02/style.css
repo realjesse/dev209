@@ -18,6 +18,10 @@ img {
 
 ul {
     list-style: none;
+    display: grid;
+    grid-template-columns: 318px 318px 318px;
+    column-gap: 20px;
+    row-gap: 20px;
 }
 
 section {
