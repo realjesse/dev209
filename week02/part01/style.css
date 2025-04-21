@@ -23,6 +23,7 @@ section {
     align-items: center;
     text-align: center;
     border-radius: 20px;
+    gap: 20px;
 }
 
 section p {
