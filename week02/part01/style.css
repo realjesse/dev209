@@ -11,13 +11,13 @@ body, html {
 img {
     width: 288px;
     height: 288px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 section {
     width: 288px;
     background-color: hsl(0, 0%, 100%);
-    padding: 18px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
