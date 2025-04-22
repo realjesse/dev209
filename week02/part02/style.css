@@ -54,12 +54,16 @@ section p {
     font-size: 20px;
 }
 
-/* .fourth-item {
+.fourth-item {
     grid-column: 2 / 3;
-} */
+}
 
 @media (max-width: 1000px) {
     ul {
         grid-template-columns: 1fr;
+    }
+
+    .fourth-item {
+        grid-column: auto;
     }
 }
