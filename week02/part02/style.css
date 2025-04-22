@@ -19,7 +19,7 @@ img {
 ul {
     list-style: none;
     display: grid;
-    grid-template-columns: 318px 318px 318px;
+    grid-template-columns: 1fr 1fr 1fr;
     column-gap: 20px;
     row-gap: 20px;
 }
@@ -54,6 +54,12 @@ section p {
     font-size: 20px;
 }
 
-.fourth-item {
+/* .fourth-item {
     grid-column: 2 / 3;
+} */
+
+@media (max-width: 1000px) {
+    ul {
+        grid-template-columns: 1fr;
+    }
 }
