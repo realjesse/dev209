@@ -53,3 +53,7 @@ section p {
     font-weight: 700;
     font-size: 20px;
 }
+
+.fourth-item {
+    grid-column: 2 / 3;
+}
