@@ -44,4 +44,26 @@ function flipCard(cardElement) {
     flippedCardList.push(card);
 }
 
+// Checks for a match
+function checkForMatch() {
+    const [card1, card2] = flippedCardList;
+
+    // If they are equal, change card state of matched to true, then reset
+    // flippedCardList
+    if (card1.value === card2.value) {
+        card1.matched = true;
+        card2.matched = true;
+        flippedCardList = [];
+    }
+    else {
+        setTimeout(() => {
+            document.querySelector(`[element_id="${card1.id}"]`).classList.remove('flipped');
+            document.querySelector(`[element_id="${card2.id}"]`).classList.remove('flipped');
+            card1.flipped = false;
+            card2.flipped = false;
+            flippedCardList = [];
+        }, 1000)
+    }
+}
+
 createGridElements();
