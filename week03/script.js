@@ -17,10 +17,11 @@ letterList.forEach(letter => {
 })
 
 function createGridElements() {
-    for (i=0;i<16;i++) {
-        const gridElementClone = gridElement.cloneNode(true);
-        gridContainerNode.appendChild(gridElement.cloneNode(true))
-    }
+    cardList.forEach(card => {
+        const cardElement = document.createElement('section');
+        cardElement.classList.add('grid_element');
+        gridContainerNode.appendChild(cardElement);
+    })
 }
 
 createGridElements();
