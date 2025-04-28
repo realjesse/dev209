@@ -1,2 +1,2 @@
-const sectionNode = document.querySelector("section");
+const gridContainerNode = document.querySelector(".grid_container");
 
