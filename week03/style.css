@@ -100,3 +100,7 @@ button {
     border-radius: 10px;
     background-color: rgb(56, 180, 202);
 }
+
+.flipped {
+    background-color: green;
+}

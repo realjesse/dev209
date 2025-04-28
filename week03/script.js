@@ -23,8 +23,16 @@ function createGridElements() {
         const cardElement = document.createElement('section');
         cardElement.classList.add('grid_element');
         cardElement.setAttribute('element_id', card.id);
+        cardElement.addEventListener('click', () => {
+            flipCard(cardElement);
+        })
         gridContainerNode.appendChild(cardElement);
     })
+}
+
+// Flip card function
+function flipCard(cardElement) {
+    cardElement.classList.add('flipped');
 }
 
 createGridElements();
