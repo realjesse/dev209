@@ -58,6 +58,7 @@ body, html {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    background-color: rgb(236, 236, 236)
 }
 
 h1 {
@@ -71,6 +72,9 @@ section {
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 10px;
 }
 
 button {
