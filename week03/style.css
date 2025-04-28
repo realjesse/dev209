@@ -63,3 +63,10 @@ body, html {
 h1 {
     font-size: 3rem;
 }
+
+section {
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
