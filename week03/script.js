@@ -8,6 +8,8 @@ const letterList = ["A", "B", "C", "D", "E", "F", "G", "H"];
 // List that will contain card information
 const cardList = [];
 let currentCardIndex = 0;
+// List containing flipped cards
+const flippedCardList = []
 
 // For each letter in letterList, push two elements onto cardList which contain
 // that letter 
@@ -32,7 +34,14 @@ function createGridElements() {
 
 // Flip card function
 function flipCard(cardElement) {
+    // Get card item from cardList
+    const cardId = cardElement.getAttribute('element_id');
+    const card = cardList.find(c => c.id == cardId);
+
+    // Change styling
     cardElement.classList.add('flipped');
+    card.flipped = true;
+    flippedCardList.push(card);
 }
 
 createGridElements();
