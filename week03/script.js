@@ -12,14 +12,17 @@ let currentCardIndex = 0;
 // For each letter in letterList, push two elements onto cardList which contain
 // that letter 
 letterList.forEach(letter => {
-    cardList.push({value: letter});
-    cardList.push({value: letter});
+    cardList.push({id: currentCardIndex, value: letter});
+    currentCardIndex++;
+    cardList.push({id: currentCardIndex, value: letter});
+    currentCardIndex++;
 })
 
 function createGridElements() {
     cardList.forEach(card => {
         const cardElement = document.createElement('section');
         cardElement.classList.add('grid_element');
+        cardElement.setAttribute('element_id', card.id);
         gridContainerNode.appendChild(cardElement);
     })
 }
