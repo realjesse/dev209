@@ -12,9 +12,9 @@ let currentCardIndex = 0;
 // For each letter in letterList, push two elements onto cardList which contain
 // that letter 
 letterList.forEach(letter => {
-    cardList.push({id: currentCardIndex, value: letter});
+    cardList.push({id: currentCardIndex, value: letter, flipped: false, matched: false});
     currentCardIndex++;
-    cardList.push({id: currentCardIndex, value: letter});
+    cardList.push({id: currentCardIndex, value: letter, flipped: false, matched: false});
     currentCardIndex++;
 })
 
