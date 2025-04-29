@@ -63,7 +63,10 @@ function checkForMatch() {
         card1.matched = true;
         card2.matched = true;
         flippedCardList = [];
-        checkForWin()
+        console.log("test")
+        if (checkForWin()) {
+            console.log("you won!");
+        }
     }
     else {
         setTimeout(() => {
@@ -100,13 +103,12 @@ function updateMove() {
 // Check for a win, if even one is not matched then it will return false,
 // but if all of them are matched will return true
 function checkForWin() {
-    cardList.forEach(card => {
+    for (const card of cardList) {
         if (!card.matched) {
             return false;
         }
-
-        return true;
-    })
+    }
+    return true;
 }
 
 createGridElements();
