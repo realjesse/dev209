@@ -6,10 +6,10 @@ gridElement.classList.add("grid_element");
 // Potential letters for cards
 const letterList = ["A", "B", "C", "D", "E", "F", "G", "H"];
 // List that will contain card information
-const cardList = [];
+let cardList = [];
 let currentCardIndex = 0;
 // List containing flipped cards
-const flippedCardList = []
+let flippedCardList = []
 
 // For each letter in letterList, push two elements onto cardList which contain
 // that letter 
@@ -42,6 +42,11 @@ function flipCard(cardElement) {
     cardElement.classList.add('flipped');
     card.flipped = true;
     flippedCardList.push(card);
+
+    if (flippedCardList.length === 2) {
+        checkForMatch();
+    }
+    console.log(flippedCardList.length)
 }
 
 // Checks for a match
