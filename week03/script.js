@@ -41,14 +41,15 @@ function flipCard(cardElement) {
     const card = cardList.find(c => c.id == cardId);
 
     // Change styling
-    card.flipped = true;
-    updateCardStyling(card);
-    flippedCardList.push(card);
+    if (!card.flipped) {
+        card.flipped = true;
+        updateCardStyling(card);
+        flippedCardList.push(card);
+    }
 
     if (flippedCardList.length === 2) {
         checkForMatch();
     }
-    console.log(flippedCardList.length)
 }
 
 // Checks for a match
