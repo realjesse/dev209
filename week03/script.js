@@ -1,6 +1,7 @@
 // Add event listener to button for if user wants a new game.
 const buttonElement = document.querySelector(".new_game_button");
 buttonElement.addEventListener('click', () => {resetGame()});
+
 // Add event listener for rules overlay button to close it
 const rulesOverlayButton = document.querySelector(".close_overlay");
 rulesOverlayButton.addEventListener('click', () => {
@@ -37,6 +38,7 @@ letterList.forEach(letter => {
     currentCardIndex++;
 })
 
+// Placing elements (based on cardList) onto grid
 function createGridElements() {
     const gridContainerNode = document.querySelector(".grid_container");
     gridContainerNode.innerHTML = '';
@@ -84,6 +86,7 @@ function checkForMatch() {
         flippedCardList = [];
         checkForWin();
     }
+    // If not equal, then after a short delay reflip cards
     else {
         paused = true;
         setTimeout(() => {
@@ -97,6 +100,7 @@ function checkForMatch() {
     }
 }
 
+// Updates the class for cards depending on if they are flipped
 function updateCardStyling(card) {
     cardElement = getCardElement(card);
     if (card.flipped === true) {
@@ -113,6 +117,7 @@ function getCardElement(card) {
     return document.querySelector(`[element_id="${card.id}"]`);
 }
 
+// Increments move and updates DOM
 function updateMove() {
     move++;
     document.querySelector('.move_counter').textContent = `Moves: ${move}`;
@@ -136,6 +141,7 @@ function checkForWin() {
     winningParagraph.textContent = `You took ${move} moves.`;
 }
 
+// Uses Fisher-Yates sorting to produce uniform randomness
 function shuffleCards() {
     for (let i = cardList.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
