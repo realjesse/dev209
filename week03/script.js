@@ -1,17 +1,10 @@
-// Get and create elements
-const gridContainerNode = document.querySelector(".grid_container");
-const gridElement = document.createElement("section");
-gridElement.classList.add("grid_element");
-const buttonElement = document.querySelector("button");
-
 // Add event listener to button for if user wants a new game.
+const buttonElement = document.querySelector("button");
 buttonElement.addEventListener('click', () => {resetGame()});
-
 // Potential letters for cards
 const letterList = ["A", "B", "C", "D", "E", "F", "G", "H"];
 // List that will contain card information
 let cardList = [];
-let currentCardIndex = 0;
 // List containing flipped cards
 let flippedCardList = []
 // Tracks movements
@@ -20,7 +13,8 @@ let move = 0;
 let paused = false;
 
 // For each letter in letterList, push two elements onto cardList which contain
-// that letter 
+// that letter
+let currentCardIndex = 0;
 letterList.forEach(letter => {
     cardList.push({id: currentCardIndex, value: letter, flipped: false, matched: false});
     currentCardIndex++;
@@ -29,6 +23,7 @@ letterList.forEach(letter => {
 })
 
 function createGridElements() {
+    const gridContainerNode = document.querySelector(".grid_container");
     gridContainerNode.innerHTML = '';
     cardList.forEach(card => {
         const cardElement = document.createElement('section');
@@ -136,8 +131,7 @@ function resetGame() {
     // Update move variable and DOM
     move = 0;
     document.querySelector('p').textContent = `Moves: 0`;
-
 }
 
-shuffleCards();
-createGridElements();
+// Start game
+resetGame();
