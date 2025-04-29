@@ -86,6 +86,10 @@ button {
     border-radius: 10px;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .grid_container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -104,7 +108,27 @@ button {
     justify-content: center;
 }
 
+.grid_element {
+    cursor: pointer;
+}
+
 .flipped {
     background-color: green;
     color: rgb(56, 180, 202);
+}
+
+.rule_overlay {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.5rem;
+}
+
+.rule_overlay.hidden {
+    display: none;
 }

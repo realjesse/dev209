@@ -1,6 +1,13 @@
 // Add event listener to button for if user wants a new game.
 const buttonElement = document.querySelector(".new_game_button");
 buttonElement.addEventListener('click', () => {resetGame()});
+// Add event listener for rules overlay button to close it
+const rulesOverlayButton = document.querySelector(".close_overlay");
+rulesOverlayButton.addEventListener('click', () => {
+    const overlayElement = document.querySelector(".rule_overlay");
+    overlayElement.classList.add("hidden");
+})
+
 // Potential letters for cards
 const letterList = ["A", "B", "C", "D", "E", "F", "G", "H"];
 // List that will contain card information
