@@ -13,10 +13,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Overlay which will be hidden during game time -->
+    <section class="rule_overlay">
+        <h2>Game Rules</h2>
+        <p>Match pairs of cards by memorizing their positions.</p>
+        <button class="close_overlay">Got it!</button>
+    </section>
+    <!-- Game container -->
     <section class="game_container">
         <h1>Memory Game</h1>
-        <button>New Game</button>
-        <p>Moves: 0</p>
+        <button class="new_game_button">New Game</button>
+        <p class="move_counter">Moves: 0</p>
         <section class="grid_container"></section>
     </section>
 </body>

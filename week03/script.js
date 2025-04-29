@@ -1,5 +1,5 @@
 // Add event listener to button for if user wants a new game.
-const buttonElement = document.querySelector("button");
+const buttonElement = document.querySelector(".new_game_button");
 buttonElement.addEventListener('click', () => {resetGame()});
 // Potential letters for cards
 const letterList = ["A", "B", "C", "D", "E", "F", "G", "H"];
@@ -103,7 +103,7 @@ function getCardElement(card) {
 
 function updateMove() {
     move++;
-    document.querySelector('p').textContent = `Moves: ${move}`;
+    document.querySelector('.move_counter').textContent = `Moves: ${move}`;
 }
 
 // Check for a win, if even one is not matched then it will return false,
@@ -130,7 +130,7 @@ function resetGame() {
 
     // Update move variable and DOM
     move = 0;
-    document.querySelector('p').textContent = `Moves: 0`;
+    document.querySelector('.move_counter').textContent = `Moves: 0`;
 }
 
 // Start game
