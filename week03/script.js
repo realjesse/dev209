@@ -2,6 +2,10 @@
 const gridContainerNode = document.querySelector(".grid_container");
 const gridElement = document.createElement("section");
 gridElement.classList.add("grid_element");
+const buttonElement = document.querySelector("button");
+
+// Add event listener to button for if user wants a new game.
+buttonElement.addEventListener('click', () => {resetGame()});
 
 // Potential letters for cards
 const letterList = ["A", "B", "C", "D", "E", "F", "G", "H"];
@@ -25,6 +29,7 @@ letterList.forEach(letter => {
 })
 
 function createGridElements() {
+    gridContainerNode.innerHTML = '';
     cardList.forEach(card => {
         const cardElement = document.createElement('section');
         cardElement.classList.add('grid_element');
@@ -124,6 +129,15 @@ function shuffleCards() {
     }
 }
 
-shuffleCards();
+function resetGame() {
+    shuffleCards();
+    createGridElements();
 
+    // Update move variable and DOM
+    move = 0;
+    document.querySelector('p').textContent = `Moves: 0`;
+
+}
+
+shuffleCards();
 createGridElements();
