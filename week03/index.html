@@ -14,7 +14,7 @@
 </head>
 <body>
     <!-- Overlay which will be hidden during game time -->
-    <section class="rule_overlay">
+    <section class="rules overlay">
         <h2>Game Rules</h2>
         <p>Match pairs of cards by memorizing their positions.</p>
         <button class="close_overlay">Got it!</button>
@@ -26,5 +26,12 @@
         <p class="move_counter">Moves: 0</p>
         <section class="grid_container"></section>
     </section>
+    <!-- Game won screen, hidden during play, will be revealed when won -->
+     <section class="winning overlay hidden">
+        <h2>Congratulations, you won!</h2>
+        <!-- Script will edit paragraph element to reflectn number of moves -->
+        <p>You took x moves.</p>
+        <button>Play again?</button>
+     </section>
 </body>
 </html>

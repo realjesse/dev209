@@ -4,7 +4,7 @@ buttonElement.addEventListener('click', () => {resetGame()});
 // Add event listener for rules overlay button to close it
 const rulesOverlayButton = document.querySelector(".close_overlay");
 rulesOverlayButton.addEventListener('click', () => {
-    const overlayElement = document.querySelector(".rule_overlay");
+    const overlayElement = document.querySelector(".rules");
     overlayElement.classList.add("hidden");
 })
 
