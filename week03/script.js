@@ -8,6 +8,14 @@ rulesOverlayButton.addEventListener('click', () => {
     overlayElement.classList.add("hidden");
 })
 
+// Add event listener for "Play again?" button after you win
+const playAgainButton = document.querySelector(".play_again_button");
+playAgainButton.addEventListener('click', () => {
+    const winningOverlay = document.querySelector(".winning");
+    winningOverlay.classList.add("hidden");
+    resetGame();
+})
+
 // Potential letters for cards
 const letterList = ["A", "B", "C", "D", "E", "F", "G", "H"];
 // List that will contain card information
@@ -74,10 +82,7 @@ function checkForMatch() {
         card1.matched = true;
         card2.matched = true;
         flippedCardList = [];
-        console.log("test")
-        if (checkForWin()) {
-            console.log("you won!");
-        }
+        checkForWin();
     }
     else {
         paused = true;
@@ -121,7 +126,14 @@ function checkForWin() {
             return false;
         }
     }
-    return true;
+    
+    // Unhide the HTML elements that contain message
+    const winningOverlayElement = document.querySelector(".winning");
+    winningOverlayElement.classList.remove("hidden");
+
+    // Edit paragraph to show number of moves
+    const winningParagraph = document.querySelector(".winning p");
+    winningParagraph.textContent = `You took ${move} moves.`;
 }
 
 function shuffleCards() {
@@ -131,6 +143,16 @@ function shuffleCards() {
     }
 }
 
+// Resets properties such as flipped and match so list is refreshed
+function resetCardProperties() {
+    cardList.forEach(card => {
+        card.flipped = false;
+        card.matched = false;
+    })
+}
+
+// Reshuffles cards, creates new grid elements, updates DOM, resets cardList
+// properties
 function resetGame() {
     shuffleCards();
     createGridElements();
@@ -138,6 +160,8 @@ function resetGame() {
     // Update move variable and DOM
     move = 0;
     document.querySelector('.move_counter').textContent = `Moves: 0`;
+
+    resetCardProperties();
 }
 
 // Start game
