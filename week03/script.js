@@ -10,8 +10,10 @@ let cardList = [];
 let currentCardIndex = 0;
 // List containing flipped cards
 let flippedCardList = []
-
+// Tracks movements
 let move = 0;
+// Tracks whether or not paused (i.e. the user cannot interact with cards)
+let paused = false;
 
 // For each letter in letterList, push two elements onto cardList which contain
 // that letter 
@@ -40,15 +42,17 @@ function flipCard(cardElement) {
     const cardId = cardElement.getAttribute('element_id');
     const card = cardList.find(c => c.id == cardId);
 
-    // Change styling
-    if (!card.flipped) {
+    // Only do actions if user clicks on an unflipped card and the game is not
+    // paused
+    if (!card.flipped && !paused) {
         card.flipped = true;
         updateCardStyling(card);
         flippedCardList.push(card);
-    }
 
-    if (flippedCardList.length === 2) {
-        checkForMatch();
+        // If two cards are flipped, check for a match
+        if (flippedCardList.length === 2) {
+            checkForMatch();
+        }
     }
 }
 
@@ -69,12 +73,14 @@ function checkForMatch() {
         }
     }
     else {
+        paused = true;
         setTimeout(() => {
             card1.flipped = false;
             card2.flipped = false;
             updateCardStyling(card1);
             updateCardStyling(card2);
             flippedCardList = [];
+            paused = false;
         }, 1000)
     }
 }
