@@ -11,6 +11,8 @@ let currentCardIndex = 0;
 // List containing flipped cards
 let flippedCardList = []
 
+let move = 0;
+
 // For each letter in letterList, push two elements onto cardList which contain
 // that letter 
 letterList.forEach(letter => {
@@ -52,6 +54,7 @@ function flipCard(cardElement) {
 // Checks for a match
 function checkForMatch() {
     const [card1, card2] = flippedCardList;
+    updateMove();
 
     // If they are equal, change card state of matched to true, then reset
     // flippedCardList
@@ -85,6 +88,11 @@ function updateCardStyling(card) {
 
 function getCardElement(card) {
     return document.querySelector(`[element_id="${card.id}"]`);
+}
+
+function updateMove() {
+    move++;
+    document.querySelector('p').textContent = `Moves: ${move}`;
 }
 
 createGridElements();
