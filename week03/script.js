@@ -58,11 +58,12 @@ function checkForMatch() {
     updateMove();
 
     // If they are equal, change card state of matched to true, then reset
-    // flippedCardList
+    // flippedCardList.  Also check for win.
     if (card1.value === card2.value) {
         card1.matched = true;
         card2.matched = true;
         flippedCardList = [];
+        checkForWin()
     }
     else {
         setTimeout(() => {
@@ -94,6 +95,18 @@ function getCardElement(card) {
 function updateMove() {
     move++;
     document.querySelector('p').textContent = `Moves: ${move}`;
+}
+
+// Check for a win, if even one is not matched then it will return false,
+// but if all of them are matched will return true
+function checkForWin() {
+    cardList.forEach(card => {
+        if (!card.matched) {
+            return false;
+        }
+
+        return true;
+    })
 }
 
 createGridElements();
