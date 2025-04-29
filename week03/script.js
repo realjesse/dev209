@@ -39,8 +39,8 @@ function flipCard(cardElement) {
     const card = cardList.find(c => c.id == cardId);
 
     // Change styling
-    cardElement.classList.add('flipped');
     card.flipped = true;
+    updateCardStyling(card);
     flippedCardList.push(card);
 
     if (flippedCardList.length === 2) {
@@ -62,13 +62,29 @@ function checkForMatch() {
     }
     else {
         setTimeout(() => {
-            document.querySelector(`[element_id="${card1.id}"]`).classList.remove('flipped');
-            document.querySelector(`[element_id="${card2.id}"]`).classList.remove('flipped');
             card1.flipped = false;
             card2.flipped = false;
+            updateCardStyling(card1);
+            updateCardStyling(card2);
             flippedCardList = [];
         }, 1000)
     }
+}
+
+function updateCardStyling(card) {
+    cardElement = getCardElement(card);
+    if (card.flipped === true) {
+        cardElement.classList.add('flipped');
+        cardElement.textContent = `${card.value}`;
+    }
+    else {
+        cardElement.classList.remove('flipped');
+        cardElement.textContent = "";
+    }
+}
+
+function getCardElement(card) {
+    return document.querySelector(`[element_id="${card.id}"]`);
 }
 
 createGridElements();
