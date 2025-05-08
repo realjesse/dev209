@@ -59,6 +59,8 @@ function flipCard(cardElement) {
     const cardId = cardElement.getAttribute('element_id');
     const card = cardList.find(c => c.id == cardId);
 
+    console.log(flippedCardList);
+
     // Only do actions if user clicks on an unflipped card and the game is not
     // paused
     if (!card.flipped && !paused) {
@@ -87,6 +89,7 @@ function checkForMatch() {
         card2.matched = true;
         flippedCardList = [];
         checkForWin();
+        saveGameState();
     }
     // If not equal, then after a short delay reflip cards
     else {
@@ -98,10 +101,9 @@ function checkForMatch() {
             updateCardStyling(card2);
             flippedCardList = [];
             paused = false;
+            saveGameState();
         }, 1000)
     }
-
-    saveGameState();
 }
 
 // Updates the class for cards depending on if they are flipped
@@ -175,7 +177,7 @@ function resetGame() {
     resetCardProperties();
 
     // Remove local stored saved state
-    localStorage.removeItem('gameState');
+    sessionStorage.removeItem('gameState');
 }
 
 // Saves game state to local storage
@@ -185,12 +187,12 @@ function saveGameState() {
         flippedCardList: flippedCardList,
         move: move
     };
-    localStorage.setItem('gameState', JSON.stringify(gameState));
+    sessionStorage.setItem('gameState', JSON.stringify(gameState));
 }
 
 // Loads game state from local storage
 function loadGameState() {
-    const savedState = localStorage.getItem('gameState');
+    const savedState = sessionStorage.getItem('gameState');
     // Check if there is a saved state, if not then don't run
     if (savedState) {
         const gameState = JSON.parse(savedState);
