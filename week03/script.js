@@ -128,6 +128,10 @@ function updateMove() {
     move++;
     document.querySelector('.move_counter').textContent = `Moves: ${move}`;
     saveGameState();
+
+    // Update total moves
+    let moves = Number(localStorage.getItem('totalMoves'));
+    localStorage.setItem('totalMoves', moves + 1);
 }
 
 // Check for a win, if even one is not matched then it will return false,
@@ -193,6 +197,12 @@ function saveGameState() {
 // Loads game state from local storage
 function loadGameState() {
     const savedState = sessionStorage.getItem('gameState');
+
+    // Check if there is a local storage for total moves, if not then create
+    if (!localStorage.getItem('totalMoves')) {
+        localStorage.setItem('totalMoves', 0);
+    }
+
     // Check if there is a saved state, if not then don't run
     if (savedState) {
         const gameState = JSON.parse(savedState);
