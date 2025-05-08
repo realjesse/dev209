@@ -17,6 +17,14 @@ playAgainButton.addEventListener('click', () => {
     resetGame();
 })
 
+// Event listener for anytime that total move local storage is changed
+window.addEventListener('storage', (event) => {
+    if (event.key === 'totalMoves') {
+        document.querySelector('.total_move_counter').textContent = 
+        `Total Moves: ${Number(localStorage.getItem('totalMoves'))}`;
+    }
+});
+
 // Potential letters for cards
 const letterList = ["A", "B", "C", "D", "E", "F", "G", "H"];
 // List that will contain card information
