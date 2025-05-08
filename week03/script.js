@@ -168,6 +168,9 @@ function resetGame() {
     document.querySelector('.move_counter').textContent = `Moves: 0`;
 
     resetCardProperties();
+
+    // Remove local stored saved state
+    localStorage.removeItem('gameState');
 }
 
 // Saves game state to local storage
@@ -206,4 +209,4 @@ function loadGameState() {
 }
 
 // Start game
-resetGame();
+loadGameState();
