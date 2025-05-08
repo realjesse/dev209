@@ -22,7 +22,7 @@ const letterList = ["A", "B", "C", "D", "E", "F", "G", "H"];
 // List that will contain card information
 let cardList = [];
 // List containing flipped cards
-let flippedCardList = []
+let flippedCardList = [];
 // Tracks movements
 let move = 0;
 // Tracks whether or not paused (i.e. the user cannot interact with cards)
@@ -48,9 +48,9 @@ function createGridElements() {
         cardElement.setAttribute('element_id', card.id);
         cardElement.addEventListener('click', () => {
             flipCard(cardElement);
-        })
+        });
         gridContainerNode.appendChild(cardElement);
-    })
+    });
 }
 
 // Flip card function
@@ -168,6 +168,16 @@ function resetGame() {
     document.querySelector('.move_counter').textContent = `Moves: 0`;
 
     resetCardProperties();
+}
+
+// Saves game state to local storage
+function saveGameState() {
+    const gameState = {
+        cardList: cardList,
+        flippedCardList: flippedCardList,
+        move: move
+    };
+    localStorage.setItem('gameState', JSON.stringify(gameState));
 }
 
 // Start game
