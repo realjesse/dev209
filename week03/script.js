@@ -70,6 +70,8 @@ function flipCard(cardElement) {
         if (flippedCardList.length === 2) {
             checkForMatch();
         }
+
+        saveGameState();
     }
 }
 
@@ -98,6 +100,8 @@ function checkForMatch() {
             paused = false;
         }, 1000)
     }
+
+    saveGameState();
 }
 
 // Updates the class for cards depending on if they are flipped
@@ -121,6 +125,7 @@ function getCardElement(card) {
 function updateMove() {
     move++;
     document.querySelector('.move_counter').textContent = `Moves: ${move}`;
+    saveGameState();
 }
 
 // Check for a win, if even one is not matched then it will return false,
@@ -205,8 +210,13 @@ function loadGameState() {
 
         // Update card styling for saved state
         cardList.forEach(card => updateCardStyling(card));
+    } else {
+        // If no saved state, create a new grid
+        resetGame();
     }
 }
 
 // Start game
-loadGameState();
+document.addEventListener('DOMContentLoaded', () => {
+    loadGameState();
+});
