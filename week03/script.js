@@ -59,8 +59,6 @@ function flipCard(cardElement) {
     const cardId = cardElement.getAttribute('element_id');
     const card = cardList.find(c => c.id == cardId);
 
-    console.log(flippedCardList);
-
     // Only do actions if user clicks on an unflipped card and the game is not
     // paused
     if (!card.flipped && !paused) {
@@ -130,8 +128,7 @@ function updateMove() {
     saveGameState();
 
     // Update total moves
-    let moves = Number(localStorage.getItem('totalMoves'));
-    localStorage.setItem('totalMoves', moves + 1);
+    updateTotalMoves();
 }
 
 // Check for a win, if even one is not matched then it will return false,
@@ -194,6 +191,13 @@ function saveGameState() {
     sessionStorage.setItem('gameState', JSON.stringify(gameState));
 }
 
+function updateTotalMoves() {
+    let moves = Number(localStorage.getItem('totalMoves'));
+    localStorage.setItem('totalMoves', moves + 1);
+    document.querySelector('.total_move_counter').textContent = 
+    `Total Moves: ${Number(localStorage.getItem('totalMoves'))}`;
+}
+
 // Loads game state from local storage
 function loadGameState() {
     const savedState = sessionStorage.getItem('gameState');
@@ -201,6 +205,9 @@ function loadGameState() {
     // Check if there is a local storage for total moves, if not then create
     if (!localStorage.getItem('totalMoves')) {
         localStorage.setItem('totalMoves', 0);
+    } else {
+        document.querySelector('.total_move_counter').textContent = 
+        `Total Moves: ${Number(localStorage.getItem('totalMoves'))}`;
     }
 
     // Check if there is a saved state, if not then don't run
