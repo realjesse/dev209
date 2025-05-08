@@ -180,5 +180,30 @@ function saveGameState() {
     localStorage.setItem('gameState', JSON.stringify(gameState));
 }
 
+// Loads game state from local storage
+function loadGameState() {
+    const savedState = localStorage.getItem('gameState');
+    // Check if there is a saved state, if not then don't run
+    if (savedState) {
+        const gameState = JSON.parse(savedState);
+
+        // Restore cardList
+        cardList = gameState.cardList;
+
+        // Restore flippedCardList
+        flippedCardList = gameState.flippedCardList;
+
+        // Restore move
+        move = gameState.move;
+        document.querySelector('.move_counter').textContent = `Moves: ${move}`;
+
+        // Update grid for saved state
+        createGridElements();
+
+        // Update card styling for saved state
+        cardList.forEach(card => updateCardStyling(card));
+    }
+}
+
 // Start game
 resetGame();
