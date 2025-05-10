@@ -65,11 +65,13 @@ html, body {
 .container {
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
 
 .main.container {
     background-color: #4C5958;
     width: 50%;
+    padding: 20px;
 }
 
 .hide {
