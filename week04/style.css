@@ -73,6 +73,10 @@ html, body {
     flex-direction: column;
 }
 
+.medium_gap {
+    gap: 20px;
+}
+
 .blue_background {
     background-color: #8AA6A3;
 }
