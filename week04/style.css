@@ -98,6 +98,17 @@ h1 {
     font-size: 3rem;
 }
 
+button {
+    background-color: #127369;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 .hide {
     display: none;
 }
