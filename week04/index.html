@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- Login page -->
-    <section id="login" class="blue_background horizontal_flex half_width rounded medium_padding">
+    <section id="login" class="blue_background horizontal_flex half_width rounded medium_padding hide">
         <h1>Login</h1>
         <form id="login_form" class="vertical_flex medium_gap">
             <section class="group">
@@ -30,7 +30,22 @@
             </section>
         </form>
     </section>
-    <section id="register" class="container">
+    <section id="register" class="container blue_background horizontal_flex half_width rounded medium_padding">
+        <h1>Register</h1>
+        <form id="register_form" class="vertical_flex medium_gap">
+            <section class="group">
+                <label for="register_username">Username:</label>
+                <input name="username" type="text" id="register_username" required>
+            </section>
+            <section class="group">
+                <label for="register_password">Password:</label>
+                <input name="password" type="password" id="register_password" required>
+            </section>
+            <section class="horizontal_flex">
+                <button>Go To Login</button>
+                <button type="submit">Register</button>
+            </section>
+        </form>
     </section>
 </body>
 </html>
