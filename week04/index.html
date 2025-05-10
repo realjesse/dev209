@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Assignment</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +16,7 @@
     <!-- Login page -->
     <section id="login_register_container" class="">
         <h1>Login</h1>
-        <form id="login_form" class="">
+        <form onsubmit="loginUser(event)" id="login_form" class="">
             <section class="">
                 <label for="login_username">Username:</label>
                 <input name="username" type="text" id="login_username" required>
@@ -29,7 +30,7 @@
             </section>
         </form>
         <h1>Register</h1>
-        <form id="register_form" class="">
+        <form onsubmit="registerUser(event)" id="register_form" class="">
             <section class="">
                 <label for="register_username">Username:</label>
                 <input name="username" type="text" id="register_username" required>
@@ -43,6 +44,5 @@
             </section>
         </form>
     </section>
-    
 </body>
 </html>
