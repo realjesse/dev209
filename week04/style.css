@@ -64,8 +64,13 @@ html, body {
 
 .horizontal_flex {
     display: flex;
-    flex-direction: horizontal;
+    flex-direction: row;
     justify-content: space-around;
+}
+
+.vertical_flex {
+    display: flex;
+    flex-direction: column;
 }
 
 .blue_background {
