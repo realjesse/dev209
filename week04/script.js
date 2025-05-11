@@ -58,3 +58,40 @@ async function registerUser(event) {
         console.log(error);
     }
 }
+
+async function logoutUser() {
+    try {
+        const response = await fetch(`${API_URL}/logout`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getAuthToken()}`
+            }
+        });
+
+        if (response.status === 200) {
+            // Remove cookie with token
+            document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+            // Hide app, show login page
+            document.querySelector("#login_register_container").classList.remove("hide");
+            document.querySelector("#todo_app_container").classList.add("hide");
+        } else {
+            alert("Error with logging out, try again.");
+        }
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+function getAuthToken() {
+    const cookies = document.cookie.split('; ');
+    // Find authToken among all cookies on website
+    for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === "authToken") {
+            return cookieValue;
+        }
+    }
+    // if no authToken found return nothing
+    return null;
+}
