@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:3000"
-let currentlyViewedItem = -999;
+let currentlyViewedItemId = null;
 
 window.onload = () => {
     if (getAuthToken()) {
@@ -144,7 +144,7 @@ async function fetchAndRenderTodos() {
                 const editButton = document.createElement("button");
                 editButton.textContent = "Edit";
                 editButton.addEventListener("click", () => {
-                    currentlyViewedItem = todo.id;
+                    currentlyViewedItemId = todo.id;
                     showEditItem();
                 });
                 listItem.appendChild(editButton);
@@ -174,6 +174,34 @@ async function deleteTodoListItem(id) {
             fetchAndRenderTodos();
         } else {
             alert("Failed to delete item");
+        }
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+async function editTodoListItem(event) {
+    event.preventDefault();
+
+    const title = document.querySelector("#edit_todo_list_title").value;
+    const description = document.querySelector("#edit_todo_list_description").value;
+    
+    try {
+        const response = await fetch(`${API_URL}/todos/${currentlyViewedItemId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getAuthToken()}`,
+            },
+            body: JSON.stringify({ title, description }),
+        });
+
+        if (response.status === 200) {
+            currentlyViewedItemId = null;
+            closeOverlay();
+            fetchAndRenderTodos();
+        } else {
+            alert("Failed to edit item");
         }
     } catch(error) {
         console.log(error);
