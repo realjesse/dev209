@@ -132,6 +132,18 @@ async function fetchAndRenderTodos() {
                 const listItem = document.createElement("li");
                 listItem.textContent = `${todo.title}: ${todo.description}`;
 
+                // Checkbox for completion
+                const checkBox = document.createElement("input");
+                checkBox.type = "checkbox";
+                if (todo.completed === true) {
+                    checkBox.checked = true;
+                    listItem.style.textDecoration = "line-through";
+                }
+                checkBox.addEventListener("change", () => {
+                    toggleTodoListCompletion(todo.id, todo.completed);
+                });
+                listItem.appendChild(checkBox);
+
                 // Create button to delete
                 const deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
@@ -202,6 +214,31 @@ async function editTodoListItem(event) {
             fetchAndRenderTodos();
         } else {
             alert("Failed to edit item");
+        }
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+async function toggleTodoListCompletion(id, completedStatus) {
+    // If current completed status is true, then turn updated completed status
+    // to false, and vice versa
+    completed = !completedStatus;
+
+    try {
+        const response = await fetch(`${API_URL}/todos/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getAuthToken()}`,
+            },
+            body: JSON.stringify({ completed }),
+        });
+
+        if (response.status === 200) {
+            fetchAndRenderTodos();
+        } else {
+            alert("Failed to toggle completion");
         }
     } catch(error) {
         console.log(error);
