@@ -83,6 +83,30 @@ async function logoutUser() {
     }
 }
 
+async function addTodoListItem(event) {
+    event.preventDefault();
+
+    const title = document.querySelector("#add_todo_title").value;
+    const description = document.querySelector("#add_todo_description").value;
+
+    try {
+        const response = await fetch(`${API_URL}/todos`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getAuthToken()}`,
+            },
+            body: JSON.stringify({ title, description })
+        });
+
+        if (response.status === 201) {
+            console.log("success!");
+        }
+    } catch(error) {
+        console.log(error);
+    }
+}
+
 function getAuthToken() {
     const cookies = document.cookie.split('; ');
     // Find authToken among all cookies on website

@@ -50,7 +50,7 @@
         <button onclick="logoutUser()">Logout</button>
         <section>
             <h3>Todo List</h3>
-            <form onsubmit="addTodo()" id="add_todo_form">
+            <form onsubmit="addTodoListItem(event)" id="add_todo_form">
                 <section>
                     <label for="add_todo_title">Title:</label>
                     <input name="title" type="text" id="add_todo_title" required>
