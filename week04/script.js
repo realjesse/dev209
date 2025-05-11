@@ -13,6 +13,10 @@ async function loginUser(event) {
     const username = document.querySelector("#login_username").value;
     const password = document.querySelector("#login_password").value;
 
+    // Clear values
+    document.querySelector("#login_username").value = "";
+    document.querySelector("#login_password").value = "";
+
     try {
         const response = await fetch(`${API_URL}/login`, {
             method: "POST",
@@ -41,6 +45,10 @@ async function registerUser(event) {
 
     const username = document.querySelector("#register_username").value;
     const password = document.querySelector("#register_password").value;
+
+    // Clear values
+    document.querySelector("#register_username").value = "";
+    document.querySelector("#register_password").value = "";
 
     try {
         const response = await fetch(`${API_URL}/register`, {
