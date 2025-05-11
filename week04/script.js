@@ -90,6 +90,10 @@ async function addTodoListItem(event) {
     const title = document.querySelector("#add_todo_title").value;
     const description = document.querySelector("#add_todo_description").value;
 
+    // Clear values from inputs
+    document.querySelector("#add_todo_title").value = "";
+    document.querySelector("#add_todo_description").value = "";
+
     try {
         const response = await fetch(`${API_URL}/todos`, {
             method: "POST",
@@ -215,6 +219,10 @@ async function editTodoListItem(event) {
 
     const title = document.querySelector("#edit_todo_list_title").value;
     const description = document.querySelector("#edit_todo_list_description").value;
+
+    // Clear values from inputs
+    document.querySelector("#edit_todo_list_title").value = "";
+    document.querySelector("#edit_todo_list_description").value = "";
     
     try {
         const response = await fetch(`${API_URL}/todos/${currentlyViewedItemId}`, {

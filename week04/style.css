@@ -131,6 +131,10 @@ form {
     font-size: 2rem
 }
 
+#todo_list_container {
+    margin-top: 15px;
+}
+
 input[type="checkbox"] {
     width: 40px;
     height: 40px;
