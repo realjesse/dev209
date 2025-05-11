@@ -125,6 +125,18 @@ form {
     gap: 5px;
 }
 
+.todo_list_item_button_section button {
+    border-radius: 0;
+}
+
+.edit_button {
+    background-color: rgb(43, 110, 255);
+}
+
+.delete_button {
+    background-color: rgb(255, 0, 0)
+}
+
 .hide {
     display: none;
 }

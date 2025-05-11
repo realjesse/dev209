@@ -150,10 +150,12 @@ async function fetchAndRenderTodos() {
 
                 // Section that will contain buttons
                 const buttonSection = document.createElement("section");
+                buttonSection.classList.add('todo_list_item_button_section')
 
                 // Create button to delete
                 const deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
+                deleteButton.classList.add("delete_button");
                 deleteButton.addEventListener("click", () => {
                     deleteTodoListItem(todo.id);
                 });
@@ -162,6 +164,7 @@ async function fetchAndRenderTodos() {
                 // Create button to edit
                 const editButton = document.createElement("button");
                 editButton.textContent = "Edit";
+                editButton.classList.add("edit_button");
                 editButton.addEventListener("click", () => {
                     currentlyViewedItemId = todo.id;
                     showEditItem();
