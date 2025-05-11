@@ -1,5 +1,11 @@
 const API_URL = "http://localhost:3000"
 
+window.onload = () => {
+    if (getAuthToken()) {
+
+    }
+}
+
 async function loginUser(event) {
     event.preventDefault();
     
@@ -18,12 +24,8 @@ async function loginUser(event) {
         if (response.status === 200) {
             const data = await response.json();
             const token = data.token;
-
             document.cookie = `authToken=${token};`
-
-            // Hide login/register container, unhide app
-            document.querySelector("#login_register_container").classList.add("hide");
-            document.querySelector("#todo_app_container").classList.remove("hide");
+            showApp();
         } else {
             alert("Unsuccessful :(")
         }
@@ -72,9 +74,7 @@ async function logoutUser() {
         if (response.status === 200) {
             // Remove cookie with token
             document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
-            // Hide app, show login page
-            document.querySelector("#login_register_container").classList.remove("hide");
-            document.querySelector("#todo_app_container").classList.add("hide");
+            showLogin();
         } else {
             alert("Error with logging out, try again.");
         }
@@ -94,4 +94,14 @@ function getAuthToken() {
     }
     // if no authToken found return nothing
     return null;
+}
+
+function showApp() {
+    document.querySelector("#login_register_container").classList.add("hide");
+    document.querySelector("#todo_app_container").classList.remove("hide");
+}
+
+function showLogin() {
+    document.querySelector("#login_register_container").classList.remove("hide");
+    document.querySelector("#todo_app_container").classList.add("hide");
 }
