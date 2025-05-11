@@ -48,19 +48,19 @@
     <section id="todo_app_container" class="hide container">
         <!-- Logout button -->
         <button onclick="logoutUser()">Logout</button>
-        <section>
+        <section class="form_container">
             <h3>Todo List</h3>
             <form onsubmit="addTodoListItem(event)" id="add_todo_form">
-                <section>
+                <section class="form_group">
                     <label for="add_todo_title">Title:</label>
                     <input name="title" type="text" id="add_todo_title" required>
                 </section>
-                <section>
+                <section class="form_group">
                     <label for="add_todo_description">Description:</label>
                     <input name="description" type="text" id="add_todo_description" required>
                 </section>
-                <section>
-                    <button type="submit">Add Todo</button>
+                <section class="submit_button_container">
+                    <button class="submit_button" type="submit">Add Todo</button>
                 </section>
             </form>
             <!-- Todo List Area -->
