@@ -68,6 +68,7 @@ h3 {
 li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .overlay {
@@ -123,6 +124,11 @@ form {
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.todo_list_item_paragraph_section {
+    flex: 1;
+    font-size: 2rem
 }
 
 input[type="checkbox"] {

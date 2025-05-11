@@ -143,10 +143,16 @@ async function fetchAndRenderTodos() {
                 });
                 listItem.appendChild(checkBox);
 
+                // Section which will contain text data
+                const paragraphSection = document.createElement("section");
+                paragraphSection.classList.add("todo_list_item_paragraph_section");
+
                 // Text that contains data for item
                 const paragraph = document.createElement('p');
                 paragraph.textContent = `${todo.title}: ${todo.description}`;
-                listItem.appendChild(paragraph);
+                // Append paragraph to paragraph section, then paragraph section to listItem
+                paragraphSection.appendChild(paragraph);
+                listItem.appendChild(paragraphSection);
 
                 // Section that will contain buttons
                 const buttonSection = document.createElement("section");
