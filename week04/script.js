@@ -1,4 +1,5 @@
 const API_URL = "http://localhost:3000"
+let currentlyViewedItem = -999;
 
 window.onload = () => {
     if (getAuthToken()) {
@@ -100,7 +101,7 @@ async function addTodoListItem(event) {
         });
 
         if (response.status === 201) {
-            console.log("success!");
+            fetchAndRenderTodos();
         } else {
             alert("Failed to create todo list item");
         }
@@ -138,6 +139,16 @@ async function fetchAndRenderTodos() {
                     deleteTodoListItem(todo.id);
                 });
                 listItem.appendChild(deleteButton);
+
+                // Create button to edit
+                const editButton = document.createElement("button");
+                editButton.textContent = "Edit";
+                editButton.addEventListener("click", () => {
+                    currentlyViewedItem = todo.id;
+                    showEditItem();
+                });
+                listItem.appendChild(editButton);
+
                 todoListContainer.appendChild(listItem);
             });
         } else {
@@ -191,4 +202,12 @@ function showApp() {
 function showLogin() {
     document.querySelector("#login_register_container").classList.remove("hide");
     document.querySelector("#todo_app_container").classList.add("hide");
+}
+
+function showEditItem() {
+    document.querySelector("#todo_list_item_edit").classList.remove("hide");
+}
+
+function closeOverlay() {
+    document.querySelector("#todo_list_item_edit").classList.add("hide");
 }
