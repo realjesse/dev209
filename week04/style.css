@@ -68,3 +68,16 @@ html, body {
 .overlay {
     position: absolute;
 }
+
+button {
+    background-color: aqua;
+    padding: 5px;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    border-radius: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+}
