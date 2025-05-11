@@ -122,15 +122,47 @@ async function fetchAndRenderTodos() {
         if (response.status === 200) {
             const todos = await response.json();
 
+            // Get container and then remove all content
             const todoListContainer = document.querySelector("#todo_list_container");
+            todoListContainer.innerHTML = '';
 
             todos.forEach(todo => {
+                // Create list item and populate with data
                 const listItem = document.createElement("li");
                 listItem.textContent = `${todo.title}: ${todo.description}`;
+
+                // Create button to delete
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", () => {
+                    deleteTodoListItem(todo.id);
+                });
+                listItem.appendChild(deleteButton);
                 todoListContainer.appendChild(listItem);
             });
         } else {
             alert("Failed to fetch todos");
+        }
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+async function deleteTodoListItem(id) {
+    try {
+        const response = await fetch(`${API_URL}/todos/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getAuthToken()}`,
+            },
+        });
+
+        if (response.status === 204) {
+            // If successful, update todo list
+            fetchAndRenderTodos();
+        } else {
+            alert("Failed to delete item");
         }
     } catch(error) {
         console.log(error);
