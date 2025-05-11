@@ -16,7 +16,14 @@ async function loginUser(event) {
         });
 
         if (response.status === 200) {
-            alert("Success, login");
+            const data = await response.json();
+            const token = data.token;
+
+            document.cookie = `authToken=${token};`
+
+            // Hide login/register container, unhide app
+            document.querySelector("#login_register_container").classList.add("hide");
+            document.querySelector("#todo_app_container").classList.remove("hide");
         } else {
             alert("Unsuccessful :(")
         }

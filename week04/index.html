@@ -14,7 +14,7 @@
 </head>
 <body>
     <!-- Login and register page -->
-    <section id="login_register_container" class="hide">
+    <section id="login_register_container" class="">
         <h1>Login</h1>
         <form onsubmit="loginUser(event)" id="login_form" class="">
             <section class="">
@@ -45,12 +45,12 @@
         </form>
     </section>
     <!-- Todo list app -->
-    <section id="todo_app_container" class="">
+    <section id="todo_app_container" class="hide">
         <!-- Logout button -->
         <button>Logout</button>
         <section>
             <h3>Todo List</h3>
-            <form>
+            <form onsubmit="addTodo()" id="add_todo_form">
                 <section>
                     <label for="add_todo_title">Title:</label>
                     <input name="title" type="text" id="add_todo_title" required>
