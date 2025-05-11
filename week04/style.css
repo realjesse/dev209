@@ -138,6 +138,10 @@ form {
     margin-bottom: 30px;
 }
 
+#login_register_container {
+    width: 50%;
+}
+
 .todo_list_item_paragraph_section {
     flex: 1;
     font-size: 2rem
