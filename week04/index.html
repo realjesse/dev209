@@ -13,8 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Login page -->
-    <section id="login_register_container" class="">
+    <!-- Login and register page -->
+    <section id="login_register_container" class="hide">
         <h1>Login</h1>
         <form onsubmit="loginUser(event)" id="login_form" class="">
             <section class="">
@@ -43,6 +43,31 @@
                 <button type="submit">Register</button>
             </section>
         </form>
+    </section>
+    <!-- Todo list app -->
+    <section id="todo_app_container" class="">
+        <!-- Logout button -->
+        <button>Logout</button>
+        <section>
+            <h3>Todo List</h3>
+            <form>
+                <section>
+                    <label for="add_todo_title">Title:</label>
+                    <input name="title" type="text" id="add_todo_title" required>
+                </section>
+                <section>
+                    <label for="add_todo_description">Description:</label>
+                    <input name="description" type="text" id="add_todo_description" required>
+                </section>
+                <section>
+                    <button type="submit">Add Todo</button>
+                </section>
+            </form>
+            <!-- Todo List Area -->
+            <section>
+
+            </section>
+        </section>
     </section>
 </body>
 </html>
