@@ -101,6 +101,36 @@ async function addTodoListItem(event) {
 
         if (response.status === 201) {
             console.log("success!");
+        } else {
+            alert("Failed to create todo list item");
+        }
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+async function fetchAndRenderTodos() {
+    try {
+        const response = await fetch(`${API_URL}/todos`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getAuthToken()}`,
+            }
+        });
+
+        if (response.status === 200) {
+            const todos = await response.json();
+
+            const todoListContainer = document.querySelector("#todo_list_container");
+
+            todos.forEach(todo => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${todo.title}: ${todo.description}`;
+                todoListContainer.appendChild(listItem);
+            });
+        } else {
+            alert("Failed to fetch todos");
         }
     } catch(error) {
         console.log(error);
@@ -123,6 +153,7 @@ function getAuthToken() {
 function showApp() {
     document.querySelector("#login_register_container").classList.add("hide");
     document.querySelector("#todo_app_container").classList.remove("hide");
+    fetchAndRenderTodos();
 }
 
 function showLogin() {
