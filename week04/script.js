@@ -128,9 +128,8 @@ async function fetchAndRenderTodos() {
             todoListContainer.innerHTML = '';
 
             todos.forEach(todo => {
-                // Create list item and populate with data
+                // Create list item which will hold children with data
                 const listItem = document.createElement("li");
-                listItem.textContent = `${todo.title}: ${todo.description}`;
 
                 // Checkbox for completion
                 const checkBox = document.createElement("input");
@@ -144,13 +143,21 @@ async function fetchAndRenderTodos() {
                 });
                 listItem.appendChild(checkBox);
 
+                // Text that contains data for item
+                const paragraph = document.createElement('p');
+                paragraph.textContent = `${todo.title}: ${todo.description}`;
+                listItem.appendChild(paragraph);
+
+                // Section that will contain buttons
+                const buttonSection = document.createElement("section");
+
                 // Create button to delete
                 const deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
                 deleteButton.addEventListener("click", () => {
                     deleteTodoListItem(todo.id);
                 });
-                listItem.appendChild(deleteButton);
+                buttonSection.appendChild(deleteButton);
 
                 // Create button to edit
                 const editButton = document.createElement("button");
@@ -159,7 +166,9 @@ async function fetchAndRenderTodos() {
                     currentlyViewedItemId = todo.id;
                     showEditItem();
                 });
-                listItem.appendChild(editButton);
+                buttonSection.appendChild(editButton);
+
+                listItem.appendChild(buttonSection);
 
                 todoListContainer.appendChild(listItem);
             });
