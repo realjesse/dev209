@@ -1,0 +1,86 @@
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+      <section id="login_register_container" class="">
+          <h1>Login</h1>
+          <form onsubmit="loginUser(event)" id="login_form" class="">
+              <section class="form_group">
+                  <label for="login_username">Username:</label>
+                  <input name="username" type="text" id="login_username" required />
+              </section>
+              <section class="form_group">
+                  <label for="login_password">Password:</label>
+                  <input name="password" type="password" id="login_password" required />
+              </section>
+              <section class="submit_button_container">
+                  <button type="submit">Login</button>
+              </section>
+          </form>
+          <h1>Register</h1>
+          <form onsubmit="registerUser(event)" id="register_form" class="">
+              <section class="form_group">
+                  <label for="register_username">Username:</label>
+                  <input name="username" type="text" id="register_username" required />
+              </section>
+              <section class="form_group">
+                  <label for="register_password">Password:</label>
+                  <input name="password" type="password" id="register_password" required />
+              </section>
+              <section class="submit_button_container">
+                  <button type="submit">Register</button>
+              </section>
+          </form>
+      </section>
+      <section id="todo_app_container" class="hide container">
+          <button onclick="logoutUser()">Logout</button>
+          <section class="form_container">
+              <h3>Todo List</h3>
+              <form onsubmit="addTodoListItem(event)" id="add_todo_form">
+                  <section class="form_group">
+                      <label for="add_todo_title">Title:</label>
+                      <input name="title" type="text" id="add_todo_title" required />
+                  </section>
+                  <section class="form_group">
+                      <label for="add_todo_description">Description:</label>
+                      <input name="description" type="text" id="add_todo_description" required />
+                  </section>
+                  <section class="submit_button_container">
+                      <button class="submit_button" type="submit">Add Todo</button>
+                  </section>
+              </form>
+              <ul id="todo_list_container">
+
+              </ul>
+          </section>
+      </section>
+      <section id="todo_list_item_edit" class="hide overlay">
+          <button onclick="closeOverlay()">Back</button>
+          <section>
+              <h3>Edit item</h3>
+              <form onsubmit="editTodoListItem(event)" id="edit_todo_list_item">
+                  <section class="form_group">
+                      <label for="edit_todo_list_title">Title:</label>
+                      <input type="text" name="title" id="edit_todo_list_title" />
+                  </section>
+                  <section class="form_group">
+                      <label for="edit_todo_list_description">Description:</label>
+                      <input type="text" name="descirption" id="edit_todo_list_description" />
+                  </section>
+                  <section class="submit_button_container">
+                      <button type="submit">Submit</button>
+                  </section>
+              </form>
+          </section>
+      </section>
+    </>
+  )
+}
+
+export default App
