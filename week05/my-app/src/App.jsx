@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 
 function App() {
     // Code from original project
@@ -37,16 +38,7 @@ function App() {
         }
     }
 
-    async function registerUser(event) {
-        event.preventDefault();
-
-        const username = document.querySelector("#register_username").value;
-        const password = document.querySelector("#register_password").value;
-
-        // Clear values
-        document.querySelector("#register_username").value = "";
-        document.querySelector("#register_password").value = "";
-
+    async function registerUser(username, password) {
         try {
             const response = await fetch(`${API_URL}/register`, {
                 method: "POST",
@@ -312,20 +304,7 @@ function App() {
     <>
       <section id="login_register_container" className="">
           <LoginForm onLogin={loginUser} />
-          <h1>Register</h1>
-          <form onSubmit={registerUser} id="register_form" className="">
-              <section className="form_group">
-                  <label htmlFor="register_username">Username:</label>
-                  <input name="username" type="text" id="register_username" required />
-              </section>
-              <section className="form_group">
-                  <label htmlFor="register_password">Password:</label>
-                  <input name="password" type="password" id="register_password" required />
-              </section>
-              <section className="submit_button_container">
-                  <button type="submit">Register</button>
-              </section>
-          </form>
+          <RegisterForm onRegister={registerUser} />
       </section>
       <section id="todo_app_container" className="hide container">
           <button onClick={logoutUser}>Logout</button>
