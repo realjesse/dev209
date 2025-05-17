@@ -3,6 +3,7 @@ import './App.css'
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import TodoList from './components/TodoList';
+import EditTodoListItem from './components/EditTodoListItem';
 
 function App() {
     // Code from original project
@@ -203,16 +204,7 @@ function App() {
         }
     }
 
-    async function editTodoListItem(event) {
-        event.preventDefault();
-
-        const title = document.querySelector("#edit_todo_list_title").value;
-        const description = document.querySelector("#edit_todo_list_description").value;
-
-        // Clear values from inputs
-        document.querySelector("#edit_todo_list_title").value = "";
-        document.querySelector("#edit_todo_list_description").value = "";
-        
+    async function editTodoListItem(title, description) {
         try {
             const response = await fetch(`${API_URL}/todos/${currentlyViewedItemId}`, {
                 method: "PUT",
@@ -299,25 +291,7 @@ function App() {
           <RegisterForm onRegister={registerUser} />
       </section>
       <TodoList onAddTodo={addTodoListItem} onLogoutUser={logoutUser} />
-      <section id="todo_list_item_edit" className="hide overlay">
-          <button onClick={closeOverlay}>Back</button>
-          <section>
-              <h3>Edit item</h3>
-              <form onSubmit={editTodoListItem} id="edit_todo_list_item">
-                  <section className="form_group">
-                      <label htmlFor="edit_todo_list_title">Title:</label>
-                      <input type="text" name="title" id="edit_todo_list_title" />
-                  </section>
-                  <section className="form_group">
-                      <label htmlFor="edit_todo_list_description">Description:</label>
-                      <input type="text" name="descirption" id="edit_todo_list_description" />
-                  </section>
-                  <section className="submit_button_container">
-                      <button type="submit">Submit</button>
-                  </section>
-              </form>
-          </section>
-      </section>
+      <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay}/>
     </>
   )
 }
