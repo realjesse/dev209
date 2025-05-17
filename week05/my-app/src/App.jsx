@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import TodoList from './components/TodoList';
 
 function App() {
     // Code from original project
@@ -81,16 +82,7 @@ function App() {
         }
     }
 
-    async function addTodoListItem(event) {
-        event.preventDefault();
-
-        const title = document.querySelector("#add_todo_title").value;
-        const description = document.querySelector("#add_todo_description").value;
-
-        // Clear values from inputs
-        document.querySelector("#add_todo_title").value = "";
-        document.querySelector("#add_todo_description").value = "";
-
+    async function addTodoListItem(title, description) {
         try {
             const response = await fetch(`${API_URL}/todos`, {
                 method: "POST",
@@ -306,28 +298,7 @@ function App() {
           <LoginForm onLogin={loginUser} />
           <RegisterForm onRegister={registerUser} />
       </section>
-      <section id="todo_app_container" className="hide container">
-          <button onClick={logoutUser}>Logout</button>
-          <section className="form_container">
-              <h3>Todo List</h3>
-              <form onSubmit={addTodoListItem} id="add_todo_form">
-                  <section className="form_group">
-                      <label htmlFor="add_todo_title">Title:</label>
-                      <input name="title" type="text" id="add_todo_title" required />
-                  </section>
-                  <section className="form_group">
-                      <label htmlFor="add_todo_description">Description:</label>
-                      <input name="description" type="text" id="add_todo_description" required />
-                  </section>
-                  <section className="submit_button_container">
-                      <button className="submit_button" type="submit">Add Todo</button>
-                  </section>
-              </form>
-              <ul id="todo_list_container">
-
-              </ul>
-          </section>
-      </section>
+      <TodoList onAddTodo={addTodoListItem} onLogoutUser={logoutUser} />
       <section id="todo_list_item_edit" className="hide overlay">
           <button onClick={closeOverlay}>Back</button>
           <section>
