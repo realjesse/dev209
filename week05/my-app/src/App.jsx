@@ -322,7 +322,7 @@ function closeOverlay() {
   return (
     <>
       <section id="login_register_container" className="">
-          <LoginForm></LoginForm>
+          <LoginForm onLogin={loginUser} />
           <h1>Register</h1>
           <form onSubmit={registerUser} id="register_form" className="">
               <section className="form_group">

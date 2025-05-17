@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-function LoginForm() {
+function LoginForm({ onLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     return (
         <>
             <h1>Login</h1>
-            <form onSubmit={loginUser} id="login_form" className="">
+            <form  id="login_form" className="">
                 <section className="form_group">
                     <label htmlFor="login_username">Username:</label>
                     <input 
