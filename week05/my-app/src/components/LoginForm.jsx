@@ -13,7 +13,7 @@ function LoginForm() {
                     <input 
                         name="username" 
                         type="text" 
-                        id="login_username" 
+                        value={username} 
                         onChange={e => setUsername(e.target.value)} 
                         required 
                     />
@@ -23,7 +23,7 @@ function LoginForm() {
                     <input 
                         name="password" 
                         type="password" 
-                        id="login_password"
+                        value={password}
                         onChange={e => setPassword(e.target.value)} 
                         required 
                     />
