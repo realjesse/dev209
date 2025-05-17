@@ -3,8 +3,6 @@ import './App.css'
 import LoginForm from './components/LoginForm';
 
 function App() {
-    const [count, setCount] = useState(0)
-
     // Code from original project
     const API_URL = "http://localhost:3000"
     let currentlyViewedItemId = null;
