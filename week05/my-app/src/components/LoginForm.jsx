@@ -5,7 +5,7 @@ function LoginForm() {
     const [password, setPassword] = useState('');
 
     return (
-        <section id="login_register_container" className="">
+        <>
             <h1>Login</h1>
             <form onSubmit={loginUser} id="login_form" className="">
                 <section className="form_group">
@@ -32,7 +32,7 @@ function LoginForm() {
                     <button type="submit">Login</button>
                 </section>
             </form>
-        </section>
+        </>
     );
 }
 
