@@ -4,10 +4,17 @@ function LoginForm({ onLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        onLogin(username, password);
+        setUsername('');
+        setPassword('');
+    }
+
     return (
         <>
             <h1>Login</h1>
-            <form  id="login_form" className="">
+            <form onSubmit={handleSubmit} id="login_form" className="">
                 <section className="form_group">
                     <label htmlFor="login_username">Username:</label>
                     <input 

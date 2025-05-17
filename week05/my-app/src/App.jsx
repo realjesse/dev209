@@ -15,16 +15,7 @@ window.onload = () => {
     }
 }
 
-async function loginUser(event) {
-    event.preventDefault();
-    
-    const username = document.querySelector("#login_username").value;
-    const password = document.querySelector("#login_password").value;
-
-    // Clear values
-    document.querySelector("#login_username").value = "";
-    document.querySelector("#login_password").value = "";
-
+async function loginUser(username, password) {
     try {
         const response = await fetch(`${API_URL}/login`, {
             method: "POST",
