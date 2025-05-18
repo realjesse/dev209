@@ -291,7 +291,7 @@ function App() {
           <RegisterForm onRegister={registerUser} />
       </section>
       <TodoList onAddTodo={addTodoListItem} onLogoutUser={logoutUser} />
-      <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay}/>
+      <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay} />
     </>
   )
 }
