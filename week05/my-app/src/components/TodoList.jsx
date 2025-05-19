@@ -35,7 +35,7 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL }) {
 
     return (
         <section id="todo_app_container" className="container">
-          <button onClick={onLogoutUser}>Logout</button>
+          <button onClick={logoutUser}>Logout</button>
           <section className="form_container">
               <h3>Todo List</h3>
               <form onSubmit={handleSubmit} id="add_todo_form">

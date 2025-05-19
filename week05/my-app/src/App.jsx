@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
@@ -10,33 +10,7 @@ function App() {
     const API_URL = "http://localhost:3000"
     let currentlyViewedItemId = null;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    window.onload = () => {
-        if (getAuthToken()) {
-            null;
-        }
-    }
-
-    async function addTodoListItem(title, description) {
-        try {
-            const response = await fetch(`${API_URL}/todos`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getAuthToken()}`,
-                },
-                body: JSON.stringify({ title, description })
-            });
-
-            if (response.status === 201) {
-                fetchAndRenderTodos();
-            } else {
-                alert("Failed to create todo list item");
-            }
-        } catch(error) {
-            console.log(error);
-        }
-    }
+    const [authToken, setAuthToken] = useState(null);
 
     async function fetchAndRenderTodos() {
         try {
@@ -44,7 +18,7 @@ function App() {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getAuthToken()}`,
+                    "Authorization": `Bearer ${authToken}`,
                 }
             });
 
@@ -123,7 +97,7 @@ function App() {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getAuthToken()}`,
+                    "Authorization": `Bearer ${authToken}`,
                 },
             });
 
@@ -144,7 +118,7 @@ function App() {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getAuthToken()}`,
+                    "Authorization": `Bearer ${authToken}`,
                 },
                 body: JSON.stringify({ title, description }),
             });
@@ -171,7 +145,7 @@ function App() {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getAuthToken()}`,
+                    "Authorization": `Bearer ${authToken}`,
                 },
                 body: JSON.stringify({ completed }),
             });
@@ -195,9 +169,18 @@ function App() {
                 return cookieValue;
             }
         }
-        // if no authToken found return nothing
         return null;
     }
+
+    useEffect(() => {
+        // Check if user is logged in
+        const token = getAuthToken();
+        if (token) {
+            setIsLoggedIn(true);
+            setAuthToken(token);
+            fetchAndRenderTodos();
+        }
+    }, []);
 
     function showEditItem() {
         document.querySelector("#todo_list_item_edit").classList.remove("hide");
@@ -211,7 +194,12 @@ function App() {
     <>
         {!isLoggedIn ? (
             <section id="login_register_container">
-                <LoginForm onLoginSuccess={() => setIsLoggedIn(true)} API_URL={API_URL} />
+                <LoginForm 
+                    onLoginSuccess={() => {
+                        setIsLoggedIn(true);
+                        setAuthToken(getAuthToken());
+                    }} 
+                    API_URL={API_URL} />
                 <RegisterForm API_URL={API_URL} />
             </section>
         ) : (
