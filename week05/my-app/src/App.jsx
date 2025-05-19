@@ -17,27 +17,6 @@ function App() {
         }
     }
 
-    async function registerUser(username, password) {
-        try {
-            const response = await fetch(`${API_URL}/register`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ username, password }),
-            });
-
-            if (response.status === 201) {
-                alert("Success, login");
-            } else {
-                alert("Unsuccessful :(")
-            }
-        }
-        catch(error) {
-            console.log(error);
-        }
-    }
-
     async function logoutUser() {
         try {
             const response = await fetch(`${API_URL}/logout`, {
@@ -255,7 +234,7 @@ function App() {
         {!isLoggedIn ? (
             <section id="login_register_container">
                 <LoginForm onLoginSuccess={() => setIsLoggedIn(true)} API_URL={API_URL} />
-                <RegisterForm onRegister={registerUser} />
+                <RegisterForm API_URL={API_URL} />
             </section>
         ) : (
             <>
