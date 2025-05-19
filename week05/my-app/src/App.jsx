@@ -13,29 +13,7 @@ function App() {
 
     window.onload = () => {
         if (getAuthToken()) {
-            showApp();
-        }
-    }
-
-    async function logoutUser() {
-        try {
-            const response = await fetch(`${API_URL}/logout`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getAuthToken()}`
-                }
-            });
-
-            if (response.status === 200) {
-                // Remove cookie with token
-                document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
-                showLogin();
-            } else {
-                alert("Error with logging out, try again.");
-            }
-        } catch(error) {
-            console.log(error);
+            null;
         }
     }
 
@@ -238,7 +216,7 @@ function App() {
             </section>
         ) : (
             <>
-                <TodoList onAddTodo={addTodoListItem} onLogoutUser={logoutUser} />
+                <TodoList onAddTodo={addTodoListItem} API_URL={API_URL} onLogoutUser={() => setIsLoggedIn(false)} />
                 <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay} />
             </>
         )}

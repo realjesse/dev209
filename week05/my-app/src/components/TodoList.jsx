@@ -1,8 +1,30 @@
 import { useState } from "react";
 
-function TodoList({ onAddTodo, onLogoutUser }) {
+function TodoList({ onAddTodo, onLogoutUser, API_URL }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+
+    const logoutUser = async () => {
+        try {
+            const response = await fetch(`${API_URL}/logout`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getAuthToken()}`
+                }
+            });
+
+            if (response.status === 200) {
+                // Remove cookie with token
+                document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+                onLogoutUser();
+            } else {
+                alert("Error with logging out, try again.");
+            }
+        } catch(error) {
+            console.log(error);
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
