@@ -12,7 +12,7 @@ function TodoList({ onAddTodo, onLogoutUser }) {
     }
 
     return (
-        <section id="todo_app_container" className="hide container">
+        <section id="todo_app_container" className="container">
           <button onClick={onLogoutUser}>Logout</button>
           <section className="form_container">
               <h3>Todo List</h3>

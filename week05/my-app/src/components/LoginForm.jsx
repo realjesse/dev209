@@ -1,14 +1,33 @@
 import React, { useState } from 'react';
 
-function LoginForm({ onLogin }) {
+function LoginForm({ onLoginSuccess, API_URL }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        onLogin(username, password);
-        setUsername('');
-        setPassword('');
+        try {
+            const response = await fetch(`${API_URL}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+        });
+
+        if (response.status === 200) {
+            const data = await response.json();
+            const token = data.token;
+            document.cookie = `authToken=${token};`
+            setUsername('');
+            setPassword('');
+            onLoginSuccess();
+        } else {
+            alert("Login failed");
+        }
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     return (

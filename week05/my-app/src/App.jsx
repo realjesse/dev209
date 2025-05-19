@@ -6,37 +6,14 @@ import TodoList from './components/TodoList';
 import EditTodoListItem from './components/EditTodoListItem';
 
 function App() {
-    // Code from original project
+    // Global variables and states
     const API_URL = "http://localhost:3000"
     let currentlyViewedItemId = null;
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     window.onload = () => {
         if (getAuthToken()) {
             showApp();
-        }
-    }
-
-    async function loginUser(username, password) {
-        try {
-            const response = await fetch(`${API_URL}/login`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ username, password }),
-            });
-
-            if (response.status === 200) {
-                const data = await response.json();
-                const token = data.token;
-                document.cookie = `authToken=${token};`
-                showApp();
-            } else {
-                alert("Unsuccessful :(")
-            }
-        }
-        catch(error) {
-            console.log(error);
         }
     }
 
@@ -265,17 +242,6 @@ function App() {
         return null;
     }
 
-    function showApp() {
-        document.querySelector("#login_register_container").classList.add("hide");
-        document.querySelector("#todo_app_container").classList.remove("hide");
-        fetchAndRenderTodos();
-    }
-
-    function showLogin() {
-        document.querySelector("#login_register_container").classList.remove("hide");
-        document.querySelector("#todo_app_container").classList.add("hide");
-    }
-
     function showEditItem() {
         document.querySelector("#todo_list_item_edit").classList.remove("hide");
     }
@@ -286,12 +252,17 @@ function App() {
 
   return (
     <>
-      <section id="login_register_container" className="">
-          <LoginForm onLogin={loginUser} />
-          <RegisterForm onRegister={registerUser} />
-      </section>
-      <TodoList onAddTodo={addTodoListItem} onLogoutUser={logoutUser} />
-      <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay} />
+        {!isLoggedIn ? (
+            <section id="login_register_container">
+                <LoginForm onLoginSuccess={() => setIsLoggedIn(true)} API_URL={API_URL} />
+                <RegisterForm onRegister={registerUser} />
+            </section>
+        ) : (
+            <>
+                <TodoList onAddTodo={addTodoListItem} onLogoutUser={logoutUser} />
+                <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay} />
+            </>
+        )}
     </>
   )
 }
