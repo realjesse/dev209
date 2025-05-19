@@ -1,16 +1,39 @@
 import { useState } from "react";
 
-function TodoList({ onAddTodo, onLogoutUser, API_URL }) {
+function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
+    // Add todo list item functionality
+    async function addTodoListItem(title, description) {
+        try {
+            const response = await fetch(`${API_URL}/todos`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authToken}`,
+                },
+                body: JSON.stringify({ title, description })
+            });
+
+            if (response.status === 201) {
+                fetchAndRenderTodos();
+            } else {
+                alert("Failed to create todo list item");
+            }
+        } catch(error) {
+            console.log(error);
+        }
+    }
+    
+    // Logout functionality
     const logoutUser = async () => {
         try {
             const response = await fetch(`${API_URL}/logout`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getAuthToken()}`
+                    "Authorization": `Bearer ${authToken}`
                 }
             });
 

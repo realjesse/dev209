@@ -178,7 +178,7 @@ function App() {
         if (token) {
             setIsLoggedIn(true);
             setAuthToken(token);
-            fetchAndRenderTodos();
+            //fetchAndRenderTodos();
         }
     }, []);
 
@@ -197,14 +197,19 @@ function App() {
                 <LoginForm 
                     onLoginSuccess={() => {
                         setIsLoggedIn(true);
-                        setAuthToken(getAuthToken());
                     }} 
+                    setAuthToken={setAuthToken}
                     API_URL={API_URL} />
                 <RegisterForm API_URL={API_URL} />
             </section>
         ) : (
             <>
-                <TodoList onAddTodo={addTodoListItem} API_URL={API_URL} onLogoutUser={() => setIsLoggedIn(false)} />
+                <TodoList 
+                    //onAddTodo={addTodoListItem} 
+                    API_URL={API_URL} 
+                    onLogoutUser={() => setIsLoggedIn(false)}
+                    authToken={authToken} 
+                />
                 <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay} />
             </>
         )}
