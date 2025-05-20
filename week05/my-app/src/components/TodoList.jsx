@@ -4,6 +4,7 @@ import ListItem from "./ListItem";
 function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [todoList, setTodoList] = useState([]);
 
     // Add todo list item functionality
     async function addTodoListItem(title, description) {
@@ -62,15 +63,9 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
 
             if (response.status === 200) {
                 const todos = await response.json();
+                console.log("works!")
 
-                todos.map((item) => {
-                    <ListItem 
-                        key={item.id}
-                        id={item.id}
-                        title={item.title}
-                        description={item.description}
-                    />
-                })
+                setTodoList(todos);
 
                 // // Get container and then remove all content
                 // const todoListContainer = document.querySelector("#todo_list_container");
@@ -140,7 +135,7 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onAddTodo(title, description);
+        addTodoListItem(title, description);
         setTitle('');
         setDescription('');
     }
@@ -176,7 +171,14 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
                   </section>
               </form>
               <ul id="todo_list_container">
-
+                {todoList.map((item) => (
+                    <ListItem 
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        description={item.description}
+                    />
+                ))}
               </ul>
           </section>
         </section>
