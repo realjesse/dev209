@@ -1,35 +1,10 @@
 
 
-function ListItem({ id, title, description, onDelete, onEdit }) {
-
-    // async function toggleTodoListCompletion(id, completedStatus) {
-    //     // If current completed status is true, then turn updated completed status
-    //     // to false, and vice versa
-    //     completed = !completedStatus;
-
-    //     try {
-    //         const response = await fetch(`${API_URL}/todos/${id}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": `Bearer ${authToken}`,
-    //             },
-    //             body: JSON.stringify({ completed }),
-    //         });
-
-    //         if (response.status === 200) {
-    //             fetchAndRenderTodos();
-    //         } else {
-    //             alert("Failed to toggle completion");
-    //         }
-    //     } catch(error) {
-    //         console.log(error);
-    //     }
-    // }
+function ListItem({ id, title, description, onDelete, onEdit, onToggleCompletion, completionStatus }) {
 
     return (
         <li>
-            <input type="checkbox"></input>
+            <input type="checkbox" onClick={() => onToggleCompletion(id, completionStatus)}></input>
             <section className="todo_list_item_paragraph_section">
                 <p>{title}: {description}</p>
             </section>

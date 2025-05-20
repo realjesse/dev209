@@ -74,6 +74,33 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
             console.log(error);
         }
     }
+
+    // Checkbox functionality
+    const toggleTodoListCompletion = async (id, completedStatus) => {
+        // If current completed status is true, then turn updated completed status
+        // to false, and vice versa
+        const completed = !completedStatus;
+
+        try {
+            const response = await fetch(`${API_URL}/todos/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authToken}`,
+                },
+                body: JSON.stringify({ completed }),
+            });
+
+            if (response.status === 200) {
+                console.log("Success! Completion status changed!")
+                fetchAndRenderTodos();
+            } else {
+                alert("Failed to toggle completion");
+            }
+        } catch(error) {
+            console.log(error);
+        }
+    }
     
     // Logout functionality
     const logoutUser = async () => {
@@ -228,7 +255,9 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
                             id={item.id}
                             title={item.title}
                             description={item.description}
+                            completionStatus={item.completed}
                             onDelete={deleteTodoListItem}
+                            onToggleCompletion={toggleTodoListCompletion}
                             onEdit={() => setEditingItem(item)}
                         />
                     ))}
