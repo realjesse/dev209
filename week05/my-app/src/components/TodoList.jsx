@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ListItem from "./ListItem";
 
 function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
@@ -7,7 +7,7 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
     const [todoList, setTodoList] = useState([]);
 
     // Add todo list item functionality
-    async function addTodoListItem(title, description) {
+    const addTodoListItem = async (title, description) => {
         try {
             const response = await fetch(`${API_URL}/todos`, {
                 method: "POST",
@@ -51,7 +51,7 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
         }
     }
 
-    async function fetchAndRenderTodos() {
+    const fetchAndRenderTodos = async () => {
         try {
             const response = await fetch(`${API_URL}/todos`, {
                 method: "GET",
@@ -139,6 +139,10 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
         setTitle('');
         setDescription('');
     }
+
+    useEffect(() => {
+        fetchAndRenderTodos();
+    }, []);
 
     return (
         <section id="todo_app_container" className="container">
