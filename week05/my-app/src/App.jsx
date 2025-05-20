@@ -7,7 +7,6 @@ import TodoList from './components/TodoList';
 function App() {
     // Global variables and states
     const API_URL = "http://localhost:3000"
-    let currentlyViewedItemId = null;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [authToken, setAuthToken] = useState(null);
 
@@ -29,17 +28,8 @@ function App() {
         if (token) {
             setIsLoggedIn(true);
             setAuthToken(token);
-            //fetchAndRenderTodos();
         }
     }, []);
-
-    function showEditItem() {
-        document.querySelector("#todo_list_item_edit").classList.remove("hide");
-    }
-
-    function closeOverlay() {
-        document.querySelector("#todo_list_item_edit").classList.add("hide");
-    }
 
   return (
     <>
