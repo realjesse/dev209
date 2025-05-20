@@ -4,9 +4,15 @@ function ListItem({ id, title, description, onDelete, onEdit, onToggleCompletion
 
     return (
         <li>
-            <input type="checkbox" onClick={() => onToggleCompletion(id, completionStatus)}></input>
+            <input 
+                type="checkbox"
+                checked={completionStatus} 
+                onChange={() => onToggleCompletion(id, completionStatus)} 
+            />
             <section className="todo_list_item_paragraph_section">
-                <p>{title}: {description}</p>
+                <p className={completionStatus ? "completed": ""}>
+                    {title}: {description}
+                </p>
             </section>
             <section className="todo_list_item_button_section">
                 <button className="delete_button" onClick={() => onDelete(id)}>Delete</button>
