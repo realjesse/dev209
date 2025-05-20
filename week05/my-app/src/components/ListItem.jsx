@@ -1,6 +1,6 @@
 
 
-function ListItem({ id, title, description, onDelete, onEdit, onToggleCompletion, completionStatus }) {
+function ListItem({ id, title, description, onDelete, onEdit, onToggleCompletion, completionStatus, item }) {
 
     return (
         <li>
@@ -10,7 +10,7 @@ function ListItem({ id, title, description, onDelete, onEdit, onToggleCompletion
             </section>
             <section className="todo_list_item_button_section">
                 <button className="delete_button" onClick={() => onDelete(id)}>Delete</button>
-                <button className="edit_button" onClick={onEdit}>Edit</button>
+                <button className="edit_button" onClick={() => onEdit(item)}>Edit</button>
             </section>
         </li>
     )

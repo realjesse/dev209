@@ -258,7 +258,8 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
                             completionStatus={item.completed}
                             onDelete={deleteTodoListItem}
                             onToggleCompletion={toggleTodoListCompletion}
-                            onEdit={() => setEditingItem(item)}
+                            onEdit={setEditingItem}
+                            item={item}
                         />
                     ))}
                 </ul>
