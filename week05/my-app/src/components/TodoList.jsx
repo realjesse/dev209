@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import ListItem from "./ListItem";
+import EditTodoListItem from "./EditTodoListItem"
 
 function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [todoList, setTodoList] = useState([]);
+    const [editingItem, setEditingItem] = useState(null);
 
     // Add todo list item functionality
     const addTodoListItem = async (title, description) => {
@@ -44,6 +46,29 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
                 fetchAndRenderTodos();
             } else {
                 alert("Failed to delete item");
+            }
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    // Editing functionality
+    const handleEditItem = async (id, title, description) => {
+        try {
+            const response = await fetch(`${API_URL}/todos/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authToken}`,
+                },
+                body: JSON.stringify({ title, description }),
+            });
+
+            if (response.status === 200) {
+                console.log("success")
+                fetchAndRenderTodos();
+            } else {
+                alert("Failed to edit item");
             }
         } catch(error) {
             console.log(error);
@@ -166,48 +191,58 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
     }, []);
 
     return (
-        <section id="todo_app_container" className="container">
-          <button onClick={logoutUser}>Logout</button>
-          <section className="form_container">
-              <h3>Todo List</h3>
-              <form onSubmit={handleSubmit} id="add_todo_form">
-                  <section className="form_group">
-                      <label htmlFor="add_todo_title">Title:</label>
-                      <input 
-                        name="title" 
-                        type="text" 
-                        value={title}
-                        onChange={e => setTitle(e.target.value)} 
-                        required 
-                      />
-                  </section>
-                  <section className="form_group">
-                      <label htmlFor="add_todo_description">Description:</label>
-                      <input 
-                        name="description" 
-                        type="text" 
-                        value={description}
-                        onChange={e => setDescription(e.target.value)} 
-                        required 
-                      />
-                  </section>
-                  <section className="submit_button_container">
-                      <button className="submit_button" type="submit">Add Todo</button>
-                  </section>
-              </form>
-              <ul id="todo_list_container">
-                {todoList.map((item) => (
-                    <ListItem 
-                        key={item.id}
-                        id={item.id}
-                        title={item.title}
-                        description={item.description}
-                        onDelete={deleteTodoListItem}
-                    />
-                ))}
-              </ul>
-          </section>
-        </section>
+        <>
+            <section id="todo_app_container" className="container">
+            <button onClick={logoutUser}>Logout</button>
+            <section className="form_container">
+                <h3>Todo List</h3>
+                <form onSubmit={handleSubmit} id="add_todo_form">
+                    <section className="form_group">
+                        <label htmlFor="add_todo_title">Title:</label>
+                        <input 
+                            name="title" 
+                            type="text" 
+                            value={title}
+                            onChange={e => setTitle(e.target.value)} 
+                            required 
+                        />
+                    </section>
+                    <section className="form_group">
+                        <label htmlFor="add_todo_description">Description:</label>
+                        <input 
+                            name="description" 
+                            type="text" 
+                            value={description}
+                            onChange={e => setDescription(e.target.value)} 
+                            required 
+                        />
+                    </section>
+                    <section className="submit_button_container">
+                        <button className="submit_button" type="submit">Add Todo</button>
+                    </section>
+                </form>
+                <ul id="todo_list_container">
+                    {todoList.map((item) => (
+                        <ListItem 
+                            key={item.id}
+                            id={item.id}
+                            title={item.title}
+                            description={item.description}
+                            onDelete={deleteTodoListItem}
+                            onEdit={() => setEditingItem(item)}
+                        />
+                    ))}
+                </ul>
+            </section>
+            </section>
+            {editingItem && (
+                <EditTodoListItem
+                    item={editingItem}
+                    onEditItem={handleEditItem} 
+                    onCloseOverlay={() => setEditingItem(null)} 
+                />
+            )}
+        </>
     )
 }
 

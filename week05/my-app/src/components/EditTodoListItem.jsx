@@ -1,18 +1,18 @@
 import { useState } from "react";
 
 
-function EditTodoListItem({ onEditItem, onCloseOverlay }) {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+function EditTodoListItem({ item, onEditItem, onCloseOverlay }) {
+    const [title, setTitle] = useState(item.title);
+    const [description, setDescription] = useState(item.description);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onEditItem(title, description);
-        setTitle('');
-        setDescription('');
-    }
+        onEditItem(item.id, title, description);
+        onCloseOverlay();
+    };
+
     return (
-        <section id="todo_list_item_edit" className="hide overlay">
+        <section id="todo_list_item_edit" className="overlay">
           <button onClick={onCloseOverlay}>Back</button>
           <section>
               <h3>Edit item</h3>

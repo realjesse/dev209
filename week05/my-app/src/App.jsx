@@ -3,7 +3,6 @@ import './App.css'
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import TodoList from './components/TodoList';
-import EditTodoListItem from './components/EditTodoListItem';
 
 function App() {
     // Global variables and states
@@ -62,7 +61,6 @@ function App() {
                     onLogoutUser={() => setIsLoggedIn(false)}
                     authToken={authToken} 
                 />
-                {/* <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay} /> */}
             </>
         )}
     </>

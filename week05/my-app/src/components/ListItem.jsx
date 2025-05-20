@@ -1,29 +1,6 @@
 
 
-function ListItem({ id, title, description, onDelete }) {
-
-    // async function editTodoListItem(title, description) {
-    //     try {
-    //         const response = await fetch(`${API_URL}/todos/${currentlyViewedItemId}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": `Bearer ${authToken}`,
-    //             },
-    //             body: JSON.stringify({ title, description }),
-    //         });
-
-    //         if (response.status === 200) {
-    //             currentlyViewedItemId = null;
-    //             closeOverlay();
-    //             fetchAndRenderTodos();
-    //         } else {
-    //             alert("Failed to edit item");
-    //         }
-    //     } catch(error) {
-    //         console.log(error);
-    //     }
-    // }
+function ListItem({ id, title, description, onDelete, onEdit }) {
 
     // async function toggleTodoListCompletion(id, completedStatus) {
     //     // If current completed status is true, then turn updated completed status
@@ -58,7 +35,7 @@ function ListItem({ id, title, description, onDelete }) {
             </section>
             <section className="todo_list_item_button_section">
                 <button className="delete_button" onClick={() => onDelete(id)}>Delete</button>
-                <button className="edit_button">Edit</button>
+                <button className="edit_button" onClick={onEdit}>Edit</button>
             </section>
         </li>
     )
