@@ -1,18 +1,5 @@
 import React, { useState } from 'react';
 
-function getAuthToken() {
-        const cookies = document.cookie.split('; ');
-        // Find authToken among all cookies on website
-        for (let cookie of cookies) {
-            const [cookieName, cookieValue] = cookie.split('=');
-            if (cookieName === "authToken") {
-                return cookieValue;
-            }
-        }
-        // if no authToken found return nothing
-        return null;
-    }
-
 function LoginForm({ onLoginSuccess, API_URL, setAuthToken }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

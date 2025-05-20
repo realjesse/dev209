@@ -62,7 +62,7 @@ function App() {
                     onLogoutUser={() => setIsLoggedIn(false)}
                     authToken={authToken} 
                 />
-                <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay} />
+                {/* <EditTodoListItem onEditItem={editTodoListItem} onCloseOverlay={closeOverlay} /> */}
             </>
         )}
     </>
