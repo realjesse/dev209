@@ -1,27 +1,6 @@
 
 
-function ListItem({ id, title, description }) {
-
-    // async function deleteTodoListItem(id) {
-    //     try {
-    //         const response = await fetch(`${API_URL}/todos/${id}`, {
-    //             method: "DELETE",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": `Bearer ${authToken}`,
-    //             },
-    //         });
-
-    //         if (response.status === 204) {
-    //             // If successful, update todo list
-    //             fetchAndRenderTodos();
-    //         } else {
-    //             alert("Failed to delete item");
-    //         }
-    //     } catch(error) {
-    //         console.log(error);
-    //     }
-    // }
+function ListItem({ id, title, description, onDelete }) {
 
     // async function editTodoListItem(title, description) {
     //     try {
@@ -78,7 +57,7 @@ function ListItem({ id, title, description }) {
                 <p>{title}: {description}</p>
             </section>
             <section className="todo_list_item_button_section">
-                <button className="delete_button">Delete</button>
+                <button className="delete_button" onClick={() => onDelete(id)}>Delete</button>
                 <button className="edit_button">Edit</button>
             </section>
         </li>

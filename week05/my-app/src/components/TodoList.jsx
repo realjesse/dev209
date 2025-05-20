@@ -27,6 +27,28 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
             console.log(error);
         }
     }
+
+    // Delete todo list item functionality
+    const deleteTodoListItem = async (id) => {
+        try {
+            const response = await fetch(`${API_URL}/todos/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authToken}`,
+                },
+            });
+
+            if (response.status === 204) {
+                // If successful, update todo list
+                fetchAndRenderTodos();
+            } else {
+                alert("Failed to delete item");
+            }
+        } catch(error) {
+            console.log(error);
+        }
+    }
     
     // Logout functionality
     const logoutUser = async () => {
@@ -63,7 +85,6 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
 
             if (response.status === 200) {
                 const todos = await response.json();
-                console.log("works!")
 
                 setTodoList(todos);
 
@@ -181,6 +202,7 @@ function TodoList({ onAddTodo, onLogoutUser, API_URL, authToken }) {
                         id={item.id}
                         title={item.title}
                         description={item.description}
+                        onDelete={deleteTodoListItem}
                     />
                 ))}
               </ul>
